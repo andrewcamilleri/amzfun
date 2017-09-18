@@ -13,7 +13,7 @@ object AmzPredict {
       option("inferSchema", true).
       option("header", false).
       csv("hdfs:///tmp/test.csv")
-    val points = data.map(line => LabeledPoint(line.getDouble(0), new DenseVector(line.toSeq.drop(1).toArray[Double])))
+    val points = data.map(line => LabeledPoint(line.getDouble(0), new DenseVector(line.toSeq.drop(1).map( n => n.toString.toDouble).toArray))
 
     // Build the model
     val numIterations = 100
